@@ -21,7 +21,10 @@ import {
   User,
   Grape,
   Moon,
-  Sun
+  Sun,
+  Clock,
+  Settings,
+  Menu
 } from "lucide-react";
 import { getCurrentUser, getUserProfile, signOut, UserRole, getUserRole } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
@@ -77,14 +80,14 @@ const DashboardLayout = ({ children, role = 'staff' }: DashboardLayoutProps) => 
 
   const menuItems = [
     { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
-    { icon: CheckSquare, label: "Attendance", path: "/attendance" },
-    { icon: FileText, label: "Tasks", path: "/tasks" },
-    { icon: Calendar, label: "Meetings", path: "/meetings" },
-    { icon: Building2, label: "Leave", path: "/leave" },
+    { icon: Clock, label: "Attendance", path: "/attendance" },
+    { icon: CheckSquare, label: "Tasks", path: "/tasks" },
+    { icon: Calendar, label: "Meetings", path: "/meeting-rooms" },
+    { icon: FileText, label: "Leave", path: "/leave" },
   ];
 
   if (userRole === 'admin') {
-    menuItems.push({ icon: Users, label: "Organization", path: "/organization" });
+    menuItems.push({ icon: Settings, label: "Organization", path: "/organization" });
   }
 
   const isActive = (path: string) => window.location.pathname === path;
