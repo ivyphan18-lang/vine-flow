@@ -20,12 +20,16 @@ const Attendance = () => {
   return (
     <DashboardLayout role={role}>
       <div className="space-y-6 animate-fade-in pb-20 md:pb-6">
-        <div>
-          <h2 className="text-3xl font-heading font-bold tracking-tight">Attendance</h2>
-          <p className="text-muted-foreground">Track your work hours and attendance</p>
+        <div className="mb-2">
+          <h2 className="text-4xl font-heading font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+            Attendance
+          </h2>
+          <p className="text-muted-foreground mt-2">Track your work hours and attendance</p>
         </div>
 
-        <AttendanceWidget />
+        <div className="shadow-strong rounded-lg">
+          <AttendanceWidget />
+        </div>
       </div>
     </DashboardLayout>
   );

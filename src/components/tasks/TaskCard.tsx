@@ -24,11 +24,11 @@ const TaskCard = ({ task, onStatusChange, role }: TaskCardProps) => {
   };
 
   return (
-    <Card className="p-3 hover:shadow-md transition-shadow cursor-pointer">
-      <div className="space-y-2">
+    <Card className="p-4 shadow-medium hover:shadow-strong transition-smooth cursor-pointer group border-l-4 border-l-primary/20 hover:border-l-primary">
+      <div className="space-y-3">
         <div className="flex items-start justify-between gap-2">
-          <h4 className="font-medium text-sm line-clamp-2">{task.title}</h4>
-          <Badge className={priorityColors[task.priority as keyof typeof priorityColors]}>
+          <h4 className="font-semibold text-sm line-clamp-2 group-hover:text-primary transition-smooth">{task.title}</h4>
+          <Badge className={`${priorityColors[task.priority as keyof typeof priorityColors]} font-medium`}>
             {task.priority}
           </Badge>
         </div>
@@ -40,7 +40,7 @@ const TaskCard = ({ task, onStatusChange, role }: TaskCardProps) => {
         )}
 
         {task.deadline && (
-          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+          <div className="flex items-center gap-1 text-xs text-muted-foreground bg-secondary/50 px-2 py-1 rounded-md w-fit">
             <Calendar className="h-3 w-3" />
             {format(new Date(task.deadline), 'MMM dd')}
           </div>

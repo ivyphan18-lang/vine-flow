@@ -35,17 +35,19 @@ const Organization = () => {
   return (
     <DashboardLayout role={role}>
       <div className="space-y-6 animate-fade-in pb-20 md:pb-6">
-        <div>
-          <h2 className="text-3xl font-heading font-bold tracking-tight">Organization</h2>
-          <p className="text-muted-foreground">Manage teams, users, shifts and settings</p>
+        <div className="mb-2">
+          <h2 className="text-4xl font-heading font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+            Organization
+          </h2>
+          <p className="text-muted-foreground mt-2">Manage teams, users, shifts and settings</p>
         </div>
 
         <Tabs defaultValue="teams" className="w-full">
-          <TabsList>
-            <TabsTrigger value="teams">Teams</TabsTrigger>
-            <TabsTrigger value="users">Users</TabsTrigger>
-            <TabsTrigger value="shifts">Shifts</TabsTrigger>
-            <TabsTrigger value="settings">Attendance Settings</TabsTrigger>
+          <TabsList className="bg-secondary shadow-soft">
+            <TabsTrigger value="teams" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Teams</TabsTrigger>
+            <TabsTrigger value="users" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Users</TabsTrigger>
+            <TabsTrigger value="shifts" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Shifts</TabsTrigger>
+            <TabsTrigger value="settings" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Attendance Settings</TabsTrigger>
           </TabsList>
           <TabsContent value="teams" className="mt-6">
             <TeamsManagement />

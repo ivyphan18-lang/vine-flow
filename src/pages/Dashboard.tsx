@@ -126,91 +126,117 @@ const Dashboard = () => {
   return (
     <DashboardLayout role={role}>
       <div className="space-y-6 animate-fade-in pb-20 md:pb-6">
-        <div>
-          <h2 className="text-3xl font-heading font-bold tracking-tight">Dashboard</h2>
-          <p className="text-muted-foreground">Welcome back! Here's your overview</p>
+        <div className="mb-2">
+          <h2 className="text-4xl font-heading font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+            Dashboard
+          </h2>
+          <p className="text-muted-foreground mt-2">Welcome back! Here's your overview</p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card className="shadow-soft transition-smooth hover:shadow-medium">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <Card className="shadow-medium transition-smooth hover:shadow-strong overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-primary opacity-10 rounded-full -mr-8 -mt-8" />
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Tasks</CardTitle>
-              <FileText className="h-4 w-4 text-muted-foreground" />
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <FileText className="h-4 w-4 text-primary" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.totalTasks}</div>
-              <p className="text-xs text-muted-foreground">
+              <div className="text-3xl font-bold">{stats.totalTasks}</div>
+              <p className="text-xs text-muted-foreground mt-1">
                 {stats.pendingTasks} pending
               </p>
             </CardContent>
           </Card>
 
-          <Card className="shadow-soft transition-smooth hover:shadow-medium">
+          <Card className="shadow-medium transition-smooth hover:shadow-strong overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-success/20 to-success/5 rounded-full -mr-8 -mt-8" />
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Completed</CardTitle>
-              <CheckCircle2 className="h-4 w-4 text-success" />
+              <div className="p-2 bg-success/10 rounded-lg">
+                <CheckCircle2 className="h-4 w-4 text-success" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.completedTasks}</div>
-              <div className="mt-2">
+              <div className="text-3xl font-bold">{stats.completedTasks}</div>
+              <div className="mt-3 space-y-1">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-muted-foreground">Progress</span>
+                  <span className="font-semibold text-success">{taskCompletionRate}%</span>
+                </div>
                 <Progress value={taskCompletionRate} className="h-2" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="shadow-soft transition-smooth hover:shadow-medium">
+          <Card className="shadow-medium transition-smooth hover:shadow-strong overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-warning/20 to-warning/5 rounded-full -mr-8 -mt-8" />
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Attendance</CardTitle>
-              <Clock className="h-4 w-4 text-muted-foreground" />
+              <div className="p-2 bg-warning/10 rounded-lg">
+                <Clock className="h-4 w-4 text-warning" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
+              <div className="mt-1">
                 {stats.todayAttendance ? (
-                  <Badge className="bg-success">Checked In</Badge>
+                  <Badge className="bg-success text-success-foreground">Checked In</Badge>
                 ) : (
-                  <Badge variant="outline">Not Checked In</Badge>
+                  <Badge variant="outline" className="border-muted-foreground/50">Not Checked In</Badge>
                 )}
               </div>
-              <p className="text-xs text-muted-foreground mt-2">Today</p>
+              <p className="text-xs text-muted-foreground mt-3">Today's status</p>
             </CardContent>
           </Card>
 
-          <Card className="shadow-soft transition-smooth hover:shadow-medium">
+          <Card className="shadow-medium transition-smooth hover:shadow-strong overflow-hidden relative bg-gradient-primary">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Leave Balance</CardTitle>
-              <Calendar className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-primary-foreground">Leave Balance</CardTitle>
+              <div className="p-2 bg-white/20 rounded-lg">
+                <Calendar className="h-4 w-4 text-primary-foreground" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.leaveBalance}</div>
-              <p className="text-xs text-muted-foreground">days remaining</p>
+              <div className="text-3xl font-bold text-primary-foreground">{stats.leaveBalance}</div>
+              <p className="text-xs text-primary-foreground/80 mt-1">days remaining</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Quick Actions */}
-        <Card className="shadow-medium">
+        <Card className="shadow-strong">
           <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-primary" />
+              Quick Actions
+            </CardTitle>
             <CardDescription>Common tasks you might want to do</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-3 md:grid-cols-3">
-              <button className="p-4 rounded-lg border border-border hover:border-primary transition-smooth text-left">
-                <Clock className="h-6 w-6 mb-2 text-primary" />
-                <h4 className="font-semibold">Check In/Out</h4>
+            <div className="grid gap-4 md:grid-cols-3">
+              <button className="group p-6 rounded-lg border-2 border-border hover:border-primary transition-smooth text-left hover:shadow-medium bg-gradient-to-br from-card to-secondary/30">
+                <div className="p-3 bg-primary/10 rounded-lg w-fit group-hover:bg-primary/20 transition-smooth">
+                  <Clock className="h-6 w-6 text-primary" />
+                </div>
+                <h4 className="font-semibold mt-4 mb-1">Check In/Out</h4>
                 <p className="text-sm text-muted-foreground">Record attendance</p>
               </button>
               
-              <button className="p-4 rounded-lg border border-border hover:border-primary transition-smooth text-left">
-                <FileText className="h-6 w-6 mb-2 text-primary" />
-                <h4 className="font-semibold">Create Task</h4>
+              <button className="group p-6 rounded-lg border-2 border-border hover:border-primary transition-smooth text-left hover:shadow-medium bg-gradient-to-br from-card to-secondary/30">
+                <div className="p-3 bg-primary/10 rounded-lg w-fit group-hover:bg-primary/20 transition-smooth">
+                  <FileText className="h-6 w-6 text-primary" />
+                </div>
+                <h4 className="font-semibold mt-4 mb-1">Create Task</h4>
                 <p className="text-sm text-muted-foreground">Add new task</p>
               </button>
               
-              <button className="p-4 rounded-lg border border-border hover:border-primary transition-smooth text-left">
-                <Calendar className="h-6 w-6 mb-2 text-primary" />
-                <h4 className="font-semibold">Book Meeting</h4>
+              <button className="group p-6 rounded-lg border-2 border-border hover:border-primary transition-smooth text-left hover:shadow-medium bg-gradient-to-br from-card to-secondary/30">
+                <div className="p-3 bg-primary/10 rounded-lg w-fit group-hover:bg-primary/20 transition-smooth">
+                  <Calendar className="h-6 w-6 text-primary" />
+                </div>
+                <h4 className="font-semibold mt-4 mb-1">Book Meeting</h4>
                 <p className="text-sm text-muted-foreground">Reserve a room</p>
               </button>
             </div>
@@ -218,18 +244,21 @@ const Dashboard = () => {
         </Card>
 
         {/* Recent Activity */}
-        <Card className="shadow-medium">
+        <Card className="shadow-strong">
           <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <AlertCircle className="h-5 w-5 text-primary" />
+              Recent Activity
+            </CardTitle>
             <CardDescription>Latest updates and changes</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 mt-2 rounded-full bg-primary" />
-                <div>
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-secondary/50 border border-border">
+                <div className="w-2 h-2 mt-2 rounded-full bg-primary animate-pulse-glow" />
+                <div className="flex-1">
                   <p className="text-sm font-medium">System initialized</p>
-                  <p className="text-xs text-muted-foreground">Welcome to Vine CRM</p>
+                  <p className="text-xs text-muted-foreground mt-1">Welcome to Vine CRM</p>
                 </div>
               </div>
             </div>

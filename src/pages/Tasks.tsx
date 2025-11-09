@@ -22,15 +22,17 @@ const Tasks = () => {
   return (
     <DashboardLayout role={role}>
       <div className="space-y-6 animate-fade-in pb-20 md:pb-6">
-        <div>
-          <h2 className="text-3xl font-heading font-bold tracking-tight">Tasks</h2>
-          <p className="text-muted-foreground">Manage and track your tasks</p>
+        <div className="mb-2">
+          <h2 className="text-4xl font-heading font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+            Tasks
+          </h2>
+          <p className="text-muted-foreground mt-2">Manage and track your tasks</p>
         </div>
 
         <Tabs defaultValue="board" className="w-full">
-          <TabsList>
-            <TabsTrigger value="board">Board</TabsTrigger>
-            <TabsTrigger value="list">List</TabsTrigger>
+          <TabsList className="bg-secondary shadow-soft">
+            <TabsTrigger value="board" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Board</TabsTrigger>
+            <TabsTrigger value="list" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">List</TabsTrigger>
           </TabsList>
           <TabsContent value="board" className="mt-6">
             <TaskBoard role={role} />
