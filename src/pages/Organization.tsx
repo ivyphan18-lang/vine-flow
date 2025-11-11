@@ -8,6 +8,7 @@ import ShiftsManagement from "@/components/organization/ShiftsManagement";
 import UsersManagement from "@/components/organization/UsersManagement";
 import AttendanceSettings from "@/components/organization/AttendanceSettings";
 import SalaryManagement from "@/components/organization/SalaryManagement";
+import SalaryStatistics from "@/components/organization/SalaryStatistics";
 
 const Organization = () => {
   const [role, setRole] = useState<UserRole>('staff');
@@ -48,8 +49,9 @@ const Organization = () => {
             <TabsTrigger value="teams" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Teams</TabsTrigger>
             <TabsTrigger value="users" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Users</TabsTrigger>
             <TabsTrigger value="shifts" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Shifts</TabsTrigger>
-            <TabsTrigger value="salary" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Salary & Attendance</TabsTrigger>
-            <TabsTrigger value="settings" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Attendance Settings</TabsTrigger>
+            <TabsTrigger value="salary" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Salary</TabsTrigger>
+            <TabsTrigger value="statistics" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Statistics</TabsTrigger>
+            <TabsTrigger value="settings" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Attendance</TabsTrigger>
           </TabsList>
           <TabsContent value="teams" className="mt-6">
             <TeamsManagement />
@@ -62,6 +64,9 @@ const Organization = () => {
           </TabsContent>
           <TabsContent value="salary" className="mt-6">
             <SalaryManagement />
+          </TabsContent>
+          <TabsContent value="statistics" className="mt-6">
+            <SalaryStatistics />
           </TabsContent>
           <TabsContent value="settings" className="mt-6">
             <AttendanceSettings />
