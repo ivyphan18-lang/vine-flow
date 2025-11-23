@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -18,6 +19,7 @@ import { UserRole } from "@/lib/auth";
 import { SkeletonStatCard } from "@/components/ui/skeleton-card";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [role, setRole] = useState<UserRole>('staff');
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
