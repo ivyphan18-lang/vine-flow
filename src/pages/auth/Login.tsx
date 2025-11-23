@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { signIn, signUp, getCurrentUser } from "@/lib/auth";
-import { Grape, Loader2 } from "lucide-react";
+import { Leaf, Loader2 } from "lucide-react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -102,9 +102,9 @@ const Login = () => {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center shadow-medium">
-              <Grape className="w-7 h-7 text-white" />
+              <Leaf className="w-7 h-7 text-white" />
             </div>
-            <h1 className="text-3xl font-heading font-bold">Vine CRM</h1>
+            <h1 className="text-3xl font-heading font-bold">Vine HRM</h1>
           </div>
           <p className="text-muted-foreground">Enterprise Resource Management</p>
         </div>
@@ -163,8 +163,6 @@ const Login = () => {
             <TabsContent value="signup">
               <form onSubmit={handleSignup}>
                 <CardContent className="space-y-4">
-                  <CardTitle>Create Account</CardTitle>
-                  <CardDescription>Sign up to get started with Vine CRM</CardDescription>
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">

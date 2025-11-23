@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Grape, Users, CheckSquare, Calendar, TrendingUp, Shield, Zap } from "lucide-react";
+import { Leaf, Users, CheckSquare, Calendar, TrendingUp, Shield, Zap } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth";
 
 const Index = () => {
@@ -57,12 +57,12 @@ const Index = () => {
         <div className="text-center max-w-4xl mx-auto">
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="w-16 h-16 rounded-2xl gradient-primary flex items-center justify-center shadow-strong">
-              <Grape className="w-10 h-10 text-white" />
+              <Leaf className="w-10 h-10 text-white" />
             </div>
           </div>
           
           <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-glow">
-            Vine CRM
+            Vine HRM
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-4">
@@ -70,7 +70,7 @@ const Index = () => {
           </p>
           
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Modern, powerful, and intelligent CRM system designed for internal business operations. 
+            Modern, powerful, and intelligent HRM system designed for internal business operations. 
             Streamline attendance, tasks, meetings, and team management all in one place.
           </p>
           
@@ -133,7 +133,7 @@ const Index = () => {
             Ready to Get Started?
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Join your team on Vine CRM and start managing your work more efficiently
+            Join your team on Vine HRM and start managing your work more efficiently
           </p>
           <Button 
             size="lg" 
@@ -148,7 +148,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t bg-card">
         <div className="container mx-auto px-4 py-8 text-center text-muted-foreground">
-          <p>© 2025 Vine CRM. by Thanh Duyen</p>
+          <p>© 2025 Vine HRM. by Thanh Duyen</p>
         </div>
       </footer>
     </div>

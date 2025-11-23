@@ -218,16 +218,17 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="shadow-medium transition-smooth hover:shadow-strong overflow-hidden relative bg-gradient-primary">
+          <Card className="shadow-medium transition-smooth hover:shadow-strong overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 opacity-50 rounded-full -mr-8 -mt-8" />
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-primary-foreground">Leave Balance</CardTitle>
-              <div className="p-2 bg-white/20 rounded-lg">
-                <Calendar className="h-4 w-4 text-primary-foreground" />
+              <CardTitle className="text-sm font-medium">Leave Balance</CardTitle>
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Calendar className="h-4 w-4 text-primary" />
               </div>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-primary-foreground">{stats.leaveBalance}</div>
-              <p className="text-xs text-primary-foreground/80 mt-1">days remaining</p>
+              <div className="text-3xl font-bold">{stats.leaveBalance}</div>
+              <p className="text-xs text-muted-foreground mt-1">days remaining</p>
             </CardContent>
           </Card>
         </div>

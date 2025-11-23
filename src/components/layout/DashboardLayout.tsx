@@ -19,7 +19,7 @@ import {
   FileText, 
   LogOut, 
   User,
-  Grape,
+  Leaf,
   Moon,
   Sun,
   Clock,
@@ -107,10 +107,10 @@ const DashboardLayout = ({ children, role = 'staff' }: DashboardLayoutProps) => 
         <div className="flex h-16 items-center px-4 md:px-6">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center">
-              <Grape className="w-6 h-6 text-white" />
+              <Leaf className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-heading font-bold">Vine CRM</h1>
+              <h1 className="text-xl font-heading font-bold">Vine HRM</h1>
               <p className="text-xs text-muted-foreground capitalize">{userRole} Dashboard</p>
             </div>
           </div>
