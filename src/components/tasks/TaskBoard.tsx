@@ -122,6 +122,23 @@ const TaskBoard = ({ role }: { role: UserRole }) => {
     }
   };
 
+  const getFilteredTasks = (statusValue: string) => {
+    return tasks.filter(task => {
+      const matchesSearch = !searchQuery ||
+        task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (task.description && task.description.toLowerCase().includes(searchQuery.toLowerCase()));
+
+      const matchesStatus = statusFilter === "all" || task.status === statusFilter;
+      const matchesPriority = priorityFilter === "all" || task.priority === priorityFilter;
+      const matchesAssignee = assigneeFilter === "all" ||
+        (assigneeFilter === "unassigned" ? !task.assignee_id : task.assignee_id === assigneeFilter);
+
+      const matchesStatusColumn = task.status === statusValue;
+
+      return matchesSearch && matchesStatus && matchesPriority && matchesAssignee && matchesStatusColumn;
+    });
+  };
+
   if (loading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
