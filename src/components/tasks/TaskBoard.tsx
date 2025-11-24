@@ -202,6 +202,7 @@ const TaskBoard = ({ role }: { role: UserRole }) => {
                       setEditDialogOpen(true);
                     }}
                     role={role}
+                    onTaskDeleted={fetchTasks}
                   />
                 ))}
               </CardContent>
