@@ -21,6 +21,19 @@ const TaskList = ({ role }: { role: UserRole }) => {
   const [assigneeFilter, setAssigneeFilter] = useState("all");
   const [users, setUsers] = useState<any[]>([]);
 
+  const fetchUsers = async () => {
+    try {
+      const { data } = await supabase
+        .from('profiles')
+        .select('id, first_name, last_name')
+        .order('first_name');
+
+      if (data) setUsers(data);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
   const fetchTasks = async () => {
     try {
       const user = await getCurrentUser();
@@ -42,6 +55,7 @@ const TaskList = ({ role }: { role: UserRole }) => {
 
   useEffect(() => {
     fetchTasks();
+    fetchUsers();
   }, []);
 
   if (loading) {
