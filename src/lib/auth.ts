@@ -14,6 +14,10 @@ export interface UserProfile {
   phone: string | null;
   date_of_birth: string | null;
   annual_leave_balance: number;
+  is_approved?: boolean;
+  approval_date?: string | null;
+  approval_rejected?: boolean;
+  rejection_reason?: string | null;
 }
 
 export const getCurrentUser = async (): Promise<User | null> => {
