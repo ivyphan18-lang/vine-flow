@@ -24,9 +24,34 @@ const priorityColors = {
   urgent: 'bg-red-500/10 text-red-500'
 };
 
-const TaskCard = ({ task, onStatusChange, onTaskClick, role }: TaskCardProps) => {
+const TaskCard = ({ task, onStatusChange, onTaskClick, role, onTaskDeleted }: TaskCardProps) => {
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const getInitials = (firstName?: string, lastName?: string) => {
     return `${firstName?.[0] || ''}${lastName?.[0] || ''}`.toUpperCase();
+  };
+
+  const handleDelete = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!confirm("Are you sure you want to delete this task?")) return;
+
+    setIsDeleting(true);
+    try {
+      const { error } = await supabase
+        .from('tasks')
+        .delete()
+        .eq('id', task.id);
+
+      if (error) throw error;
+
+      toast.success("Task deleted successfully");
+      onTaskDeleted?.();
+    } catch (error) {
+      console.error('Error deleting task:', error);
+      toast.error("Failed to delete task");
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   return (
