@@ -90,6 +90,16 @@ const RoomList = ({ role }: { role: UserRole }) => {
 
   return (
     <div className="space-y-4">
+      <RoomSearchFilter
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        capacityFilter={capacityFilter}
+        onCapacityChange={setCapacityFilter}
+        equipmentFilter={equipmentFilter}
+        onEquipmentChange={setEquipmentFilter}
+        availableEquipment={getAllEquipment()}
+      />
+
       {role === 'admin' && (
         <div className="flex justify-end">
           <Button onClick={() => setIsCreateOpen(true)}>
@@ -100,7 +110,7 @@ const RoomList = ({ role }: { role: UserRole }) => {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {rooms.map((room) => (
+        {filteredRooms.map((room) => (
           <Card key={room.id}>
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
