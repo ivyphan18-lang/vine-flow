@@ -46,6 +46,19 @@ const TaskBoard = ({ role }: { role: UserRole }) => {
   const [users, setUsers] = useState<any[]>([]);
   const { toast } = useToast();
 
+  const fetchUsers = async () => {
+    try {
+      const { data } = await supabase
+        .from('profiles')
+        .select('id, first_name, last_name')
+        .order('first_name');
+
+      if (data) setUsers(data);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
   const fetchTasks = async () => {
     try {
       const user = await getCurrentUser();
