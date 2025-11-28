@@ -48,7 +48,6 @@ const EditTaskDialog = ({ task, open, onOpenChange, onTaskUpdated, columns = [] 
       setTitle(task.title);
       setDescription(task.description || "");
       setPriority(task.priority);
-      setStatus(task.status);
       setColumnId(task.column_id || "");
       setDeadline(task.deadline || "");
       setAssigneeId(task.assignee_id || "unassigned");
