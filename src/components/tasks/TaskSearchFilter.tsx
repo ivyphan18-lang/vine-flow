@@ -43,21 +43,6 @@ const TaskSearchFilter = ({
         </div>
 
         <div className="min-w-[150px]">
-          <Select value={statusFilter} onValueChange={onStatusChange}>
-            <SelectTrigger className="bg-background">
-              <SelectValue placeholder="Filter by status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
-              <SelectItem value="todo">To Do</SelectItem>
-              <SelectItem value="in_progress">In Progress</SelectItem>
-              <SelectItem value="review">Review</SelectItem>
-              <SelectItem value="done">Done</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="min-w-[150px]">
           <Select value={priorityFilter} onValueChange={onPriorityChange}>
             <SelectTrigger className="bg-background">
               <SelectValue placeholder="Filter by priority" />
