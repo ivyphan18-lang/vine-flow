@@ -230,14 +230,13 @@ const TaskBoard = ({ role }: { role: UserRole }) => {
         task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (task.description && task.description.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      const matchesStatus = statusFilter === "all" || task.status === statusFilter;
       const matchesPriority = priorityFilter === "all" || task.priority === priorityFilter;
       const matchesAssignee = assigneeFilter === "all" ||
         (assigneeFilter === "unassigned" ? !task.assignee_id : task.assignee_id === assigneeFilter);
 
       const matchesColumn = task.column_id === columnId;
 
-      return matchesSearch && matchesStatus && matchesPriority && matchesAssignee && matchesColumn;
+      return matchesSearch && matchesPriority && matchesAssignee && matchesColumn;
     });
   };
 
