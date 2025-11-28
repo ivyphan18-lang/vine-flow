@@ -77,7 +77,6 @@ const EditTaskDialog = ({ task, open, onOpenChange, onTaskUpdated, columns = [] 
           title,
           description: description || null,
           priority: priority as 'low' | 'medium' | 'high' | 'urgent',
-          status: status as 'todo' | 'in_progress' | 'review' | 'done',
           column_id: columnId || null,
           deadline: deadline || null,
           assignee_id: assigneeId === 'unassigned' ? null : assigneeId || null,
