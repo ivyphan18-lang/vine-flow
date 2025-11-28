@@ -263,8 +263,6 @@ const TaskBoard = ({ role }: { role: UserRole }) => {
       <TaskSearchFilter
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
-        statusFilter={statusFilter}
-        onStatusChange={setStatusFilter}
         priorityFilter={priorityFilter}
         onPriorityChange={setPriorityFilter}
         assigneeFilter={assigneeFilter}
