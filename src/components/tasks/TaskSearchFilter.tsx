@@ -6,8 +6,6 @@ import { X } from "lucide-react";
 interface TaskSearchFilterProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
-  statusFilter: string;
-  onStatusChange: (status: string) => void;
   priorityFilter: string;
   onPriorityChange: (priority: string) => void;
   assigneeFilter: string;
