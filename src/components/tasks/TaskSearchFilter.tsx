@@ -16,19 +16,16 @@ interface TaskSearchFilterProps {
 const TaskSearchFilter = ({
   searchQuery,
   onSearchChange,
-  statusFilter,
-  onStatusChange,
   priorityFilter,
   onPriorityChange,
   assigneeFilter,
   onAssigneeChange,
   users,
 }: TaskSearchFilterProps) => {
-  const hasActiveFilters = searchQuery || statusFilter !== "all" || priorityFilter !== "all" || assigneeFilter !== "all";
+  const hasActiveFilters = searchQuery || priorityFilter !== "all" || assigneeFilter !== "all";
 
   const handleClearFilters = () => {
     onSearchChange("");
-    onStatusChange("all");
     onPriorityChange("all");
     onAssigneeChange("all");
   };
