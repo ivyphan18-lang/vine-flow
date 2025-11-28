@@ -22,12 +22,13 @@ interface CreateTaskDialogProps {
   columns?: TaskColumn[];
 }
 
-const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated }: CreateTaskDialogProps) => {
+const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated, columns = [] }: CreateTaskDialogProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("medium");
   const [deadline, setDeadline] = useState("");
   const [assigneeId, setAssigneeId] = useState("");
+  const [columnId, setColumnId] = useState("");
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
