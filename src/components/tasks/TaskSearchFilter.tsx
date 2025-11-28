@@ -6,8 +6,6 @@ import { X } from "lucide-react";
 interface TaskSearchFilterProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
-  statusFilter: string;
-  onStatusChange: (status: string) => void;
   priorityFilter: string;
   onPriorityChange: (priority: string) => void;
   assigneeFilter: string;
@@ -18,19 +16,16 @@ interface TaskSearchFilterProps {
 const TaskSearchFilter = ({
   searchQuery,
   onSearchChange,
-  statusFilter,
-  onStatusChange,
   priorityFilter,
   onPriorityChange,
   assigneeFilter,
   onAssigneeChange,
   users,
 }: TaskSearchFilterProps) => {
-  const hasActiveFilters = searchQuery || statusFilter !== "all" || priorityFilter !== "all" || assigneeFilter !== "all";
+  const hasActiveFilters = searchQuery || priorityFilter !== "all" || assigneeFilter !== "all";
 
   const handleClearFilters = () => {
     onSearchChange("");
-    onStatusChange("all");
     onPriorityChange("all");
     onAssigneeChange("all");
   };
@@ -45,21 +40,6 @@ const TaskSearchFilter = ({
             onChange={(e) => onSearchChange(e.target.value)}
             className="bg-background"
           />
-        </div>
-
-        <div className="min-w-[150px]">
-          <Select value={statusFilter} onValueChange={onStatusChange}>
-            <SelectTrigger className="bg-background">
-              <SelectValue placeholder="Filter by status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
-              <SelectItem value="todo">To Do</SelectItem>
-              <SelectItem value="in_progress">In Progress</SelectItem>
-              <SelectItem value="review">Review</SelectItem>
-              <SelectItem value="done">Done</SelectItem>
-            </SelectContent>
-          </Select>
         </div>
 
         <div className="min-w-[150px]">

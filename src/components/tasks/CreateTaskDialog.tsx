@@ -9,18 +9,26 @@ import { supabase } from "@/integrations/supabase/client";
 import { getCurrentUser } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 
+interface TaskColumn {
+  id: string;
+  name: string;
+  position: number;
+}
+
 interface CreateTaskDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onTaskCreated: () => void;
+  columns?: TaskColumn[];
 }
 
-const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated }: CreateTaskDialogProps) => {
+const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated, columns = [] }: CreateTaskDialogProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("medium");
   const [deadline, setDeadline] = useState("");
   const [assigneeId, setAssigneeId] = useState("");
+  const [columnId, setColumnId] = useState("");
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
@@ -48,6 +56,8 @@ const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated }: CreateTaskDialo
       const user = await getCurrentUser();
       if (!user) throw new Error("Not authenticated");
 
+      const finalColumnId = columnId || columns[0]?.id || null;
+
       const { error } = await supabase.from('tasks').insert([{
         title,
         description: description || null,
@@ -55,6 +65,7 @@ const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated }: CreateTaskDialo
         deadline: deadline || null,
         assignee_id: assigneeId || null,
         creator_id: user.id,
+        column_id: finalColumnId,
         status: 'todo'
       }]);
 
@@ -86,6 +97,7 @@ const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated }: CreateTaskDialo
     setPriority("medium");
     setDeadline("");
     setAssigneeId("");
+    setColumnId("");
   };
 
   return (
@@ -157,6 +169,24 @@ const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated }: CreateTaskDialo
               </SelectContent>
             </Select>
           </div>
+
+          {columns.length > 0 && (
+            <div>
+              <Label htmlFor="column">Column</Label>
+              <Select value={columnId} onValueChange={setColumnId}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select column" />
+                </SelectTrigger>
+                <SelectContent>
+                  {columns.map((column) => (
+                    <SelectItem key={column.id} value={column.id}>
+                      {column.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
 
           <div className="flex justify-end gap-2">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>

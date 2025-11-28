@@ -15,7 +15,14 @@ interface Task {
   priority: string;
   status: string;
   deadline: string | null;
+  column_id: string | null;
   assignee_id: string | null;
+}
+
+interface TaskColumn {
+  id: string;
+  name: string;
+  position: number;
 }
 
 interface EditTaskDialogProps {
@@ -23,13 +30,14 @@ interface EditTaskDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onTaskUpdated: () => void;
+  columns?: TaskColumn[];
 }
 
-const EditTaskDialog = ({ task, open, onOpenChange, onTaskUpdated }: EditTaskDialogProps) => {
+const EditTaskDialog = ({ task, open, onOpenChange, onTaskUpdated, columns = [] }: EditTaskDialogProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("medium");
-  const [status, setStatus] = useState("todo");
+  const [columnId, setColumnId] = useState("");
   const [deadline, setDeadline] = useState("");
   const [assigneeId, setAssigneeId] = useState("");
   const [users, setUsers] = useState<any[]>([]);
@@ -40,7 +48,7 @@ const EditTaskDialog = ({ task, open, onOpenChange, onTaskUpdated }: EditTaskDia
       setTitle(task.title);
       setDescription(task.description || "");
       setPriority(task.priority);
-      setStatus(task.status);
+      setColumnId(task.column_id || "");
       setDeadline(task.deadline || "");
       setAssigneeId(task.assignee_id || "unassigned");
       fetchUsers();
@@ -59,7 +67,7 @@ const EditTaskDialog = ({ task, open, onOpenChange, onTaskUpdated }: EditTaskDia
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!task) return;
-    
+
     setLoading(true);
 
     try {
@@ -69,7 +77,7 @@ const EditTaskDialog = ({ task, open, onOpenChange, onTaskUpdated }: EditTaskDia
           title,
           description: description || null,
           priority: priority as 'low' | 'medium' | 'high' | 'urgent',
-          status: status as 'todo' | 'in_progress' | 'review' | 'done',
+          column_id: columnId || null,
           deadline: deadline || null,
           assignee_id: assigneeId === 'unassigned' ? null : assigneeId || null,
         })
@@ -138,20 +146,23 @@ const EditTaskDialog = ({ task, open, onOpenChange, onTaskUpdated }: EditTaskDia
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="status">Status</Label>
-              <Select value={status} onValueChange={setStatus}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="todo">To Do</SelectItem>
-                  <SelectItem value="in_progress">In Progress</SelectItem>
-                  <SelectItem value="review">Review</SelectItem>
-                  <SelectItem value="done">Done</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+            {columns.length > 0 && (
+              <div>
+                <Label htmlFor="column">Column</Label>
+                <Select value={columnId} onValueChange={setColumnId}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {columns.map((column) => (
+                      <SelectItem key={column.id} value={column.id}>
+                        {column.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
 
             <div>
               <Label htmlFor="priority">Priority</Label>

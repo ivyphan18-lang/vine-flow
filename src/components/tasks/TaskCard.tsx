@@ -1,18 +1,33 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Calendar, AlertCircle, Trash2 } from "lucide-react";
+import { Calendar, Trash2, ChevronDown } from "lucide-react";
 import { UserRole } from "@/lib/auth";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+interface TaskColumn {
+  id: string;
+  name: string;
+  color: string;
+  position: number;
+}
 
 interface TaskCardProps {
   task: any;
-  onStatusChange: (taskId: string, newStatus: string) => void;
+  onStatusChange: (taskId: string, newColumnId: string) => void;
   onTaskClick: (task: any) => void;
+  columns: TaskColumn[];
   role: UserRole;
   onTaskDeleted?: () => void;
 }
@@ -24,12 +39,14 @@ const priorityColors = {
   urgent: 'bg-red-500/10 text-red-500'
 };
 
-const TaskCard = ({ task, onStatusChange, onTaskClick, role, onTaskDeleted }: TaskCardProps) => {
+const TaskCard = ({ task, onStatusChange, onTaskClick, columns, role, onTaskDeleted }: TaskCardProps) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const getInitials = (firstName?: string, lastName?: string) => {
     return `${firstName?.[0] || ''}${lastName?.[0] || ''}`.toUpperCase();
   };
+
+  const currentColumn = columns.find(col => col.id === task.column_id);
 
   const handleDelete = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -56,10 +73,11 @@ const TaskCard = ({ task, onStatusChange, onTaskClick, role, onTaskDeleted }: Ta
 
   return (
     <Card
-      className="p-4 shadow-medium hover:shadow-strong transition-smooth cursor-pointer group border-l-4 border-l-primary/20 hover:border-l-primary relative"
+      className="p-4 shadow-medium hover:shadow-strong transition-smooth cursor-pointer group border-l-4 relative"
+      style={{ borderLeftColor: currentColumn?.color || '#3b82f6' }}
       onClick={() => onTaskClick(task)}
     >
-      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
         <Button
           variant="ghost"
           size="sm"
@@ -90,6 +108,31 @@ const TaskCard = ({ task, onStatusChange, onTaskClick, role, onTaskDeleted }: Ta
             <Calendar className="h-3 w-3" />
             {format(new Date(task.deadline), 'MMM dd')}
           </div>
+        )}
+
+        {task.assignee && (
+          <div className="flex items-center gap-2 text-xs">
+            <Avatar className="h-5 w-5">
+              <AvatarImage src={task.assignee.avatar_url || ''} />
+              <AvatarFallback>{getInitials(task.assignee.first_name, task.assignee.last_name)}</AvatarFallback>
+            </Avatar>
+            <span className="text-muted-foreground">{task.assignee.first_name} {task.assignee.last_name}</span>
+          </div>
+        )}
+
+        {columns.length > 1 && (
+          <Select value={task.column_id || ''} onValueChange={(columnId) => onStatusChange(task.id, columnId)}>
+            <SelectTrigger className="h-7 text-xs" onClick={(e) => e.stopPropagation()}>
+              <SelectValue placeholder="Move to..." />
+            </SelectTrigger>
+            <SelectContent onClick={(e) => e.stopPropagation()}>
+              {columns.map((column) => (
+                <SelectItem key={column.id} value={column.id}>
+                  {column.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         )}
       </div>
     </Card>
