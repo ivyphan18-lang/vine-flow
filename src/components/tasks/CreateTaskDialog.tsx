@@ -170,6 +170,24 @@ const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated, columns = [] }: C
             </Select>
           </div>
 
+          {columns.length > 0 && (
+            <div>
+              <Label htmlFor="column">Column</Label>
+              <Select value={columnId} onValueChange={setColumnId}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select column" />
+                </SelectTrigger>
+                <SelectContent>
+                  {columns.map((column) => (
+                    <SelectItem key={column.id} value={column.id}>
+                      {column.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
           <div className="flex justify-end gap-2">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
               Cancel
