@@ -97,6 +97,7 @@ const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated, columns = [] }: C
     setPriority("medium");
     setDeadline("");
     setAssigneeId("");
+    setColumnId("");
   };
 
   return (
