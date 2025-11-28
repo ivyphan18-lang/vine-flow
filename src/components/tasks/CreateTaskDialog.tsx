@@ -9,10 +9,17 @@ import { supabase } from "@/integrations/supabase/client";
 import { getCurrentUser } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 
+interface TaskColumn {
+  id: string;
+  name: string;
+  position: number;
+}
+
 interface CreateTaskDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onTaskCreated: () => void;
+  columns?: TaskColumn[];
 }
 
 const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated }: CreateTaskDialogProps) => {
