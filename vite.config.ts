@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    hmr: mode === "development" ? true : false,
   },
   build: {
     outDir: "dist",
