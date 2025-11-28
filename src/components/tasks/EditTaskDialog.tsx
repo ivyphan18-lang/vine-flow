@@ -15,7 +15,14 @@ interface Task {
   priority: string;
   status: string;
   deadline: string | null;
+  column_id: string | null;
   assignee_id: string | null;
+}
+
+interface TaskColumn {
+  id: string;
+  name: string;
+  position: number;
 }
 
 interface EditTaskDialogProps {
@@ -23,6 +30,7 @@ interface EditTaskDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onTaskUpdated: () => void;
+  columns?: TaskColumn[];
 }
 
 const EditTaskDialog = ({ task, open, onOpenChange, onTaskUpdated }: EditTaskDialogProps) => {
