@@ -56,6 +56,8 @@ const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated, columns = [] }: C
       const user = await getCurrentUser();
       if (!user) throw new Error("Not authenticated");
 
+      const finalColumnId = columnId || columns[0]?.id || null;
+
       const { error } = await supabase.from('tasks').insert([{
         title,
         description: description || null,
@@ -63,6 +65,7 @@ const CreateTaskDialog = ({ open, onOpenChange, onTaskCreated, columns = [] }: C
         deadline: deadline || null,
         assignee_id: assigneeId || null,
         creator_id: user.id,
+        column_id: finalColumnId,
         status: 'todo'
       }]);
 
