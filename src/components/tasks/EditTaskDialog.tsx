@@ -69,7 +69,7 @@ const EditTaskDialog = ({ task, open, onOpenChange, onTaskUpdated, columns = [] 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!task) return;
-    
+
     setLoading(true);
 
     try {
@@ -80,6 +80,7 @@ const EditTaskDialog = ({ task, open, onOpenChange, onTaskUpdated, columns = [] 
           description: description || null,
           priority: priority as 'low' | 'medium' | 'high' | 'urgent',
           status: status as 'todo' | 'in_progress' | 'review' | 'done',
+          column_id: columnId || null,
           deadline: deadline || null,
           assignee_id: assigneeId === 'unassigned' ? null : assigneeId || null,
         })
