@@ -37,7 +37,6 @@ const EditTaskDialog = ({ task, open, onOpenChange, onTaskUpdated, columns = [] 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("medium");
-  const [status, setStatus] = useState("todo");
   const [columnId, setColumnId] = useState("");
   const [deadline, setDeadline] = useState("");
   const [assigneeId, setAssigneeId] = useState("");
