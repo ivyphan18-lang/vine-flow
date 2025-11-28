@@ -122,7 +122,7 @@ const TaskCard = ({ task, onStatusChange, onTaskClick, columns, role, onTaskDele
 
         {columns.length > 1 && (
           <Select value={task.column_id || ''} onValueChange={(columnId) => onStatusChange(task.id, columnId)}>
-            <SelectTrigger size="sm" className="h-7 text-xs" onClick={(e) => e.stopPropagation()}>
+            <SelectTrigger className="h-7 text-xs" onClick={(e) => e.stopPropagation()}>
               <SelectValue placeholder="Move to..." />
             </SelectTrigger>
             <SelectContent onClick={(e) => e.stopPropagation()}>
